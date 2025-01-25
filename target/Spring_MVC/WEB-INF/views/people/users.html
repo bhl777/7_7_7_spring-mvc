@@ -5,9 +5,12 @@
     <title></title>
 </head>
 <body>
+<a href="/new" style="font-family:sans-serif;color:indigo;font-size:25px">Add new user</a>
 <div>
-    <th:block th:each="msg : ${messages}">
-        <h1 th:text="${msg}"></h1>
+    <th:block th:each="usr : ${users}">
+        <h1 th:text="${usr}"></h1>
+        <a href="/update" style="font-family:sans-serif;color:blue;font-size:20px">Change user</a>
+        or <a href="/delete?name=Alex&surname=Asd" style="font-family:sans-serif;color:blue;font-size:20px">Delete user</a>
     </th:block>
 </div>
 </body>
