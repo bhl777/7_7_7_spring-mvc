@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import web.model.User;
 import web.service.UserServiceImpl;
 
@@ -39,6 +40,12 @@ public class UserController {
     public String addUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
 
+        return "redirect:/users";
+    }
+
+    @GetMapping("/delete")
+    public String deleteUser(@RequestParam int id) {
+        userService.deleteUser(id);
         return "redirect:/users";
     }
 }

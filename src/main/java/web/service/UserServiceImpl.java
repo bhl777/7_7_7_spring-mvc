@@ -1,6 +1,9 @@
 package web.service;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import web.dao.UserDao;
+import web.dao.UserDaoImpl;
 import web.model.User;
 
 import javax.persistence.EntityManager;
@@ -10,16 +13,22 @@ import java.util.List;
 @Service
 public class UserServiceImpl {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    private final UserDao userDao;
 
-    @Transactional
-    public void saveUser(User user) {
-        entityManager.persist(user);
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
     }
 
     public List<User> getAllUsers() {
-        return entityManager.createQuery("FROM User", User.class).getResultList();
+        return userDao.getAll();
+    }
+
+    public void saveUser(User user) {
+        userDao.add(user);
+    }
+
+    public void deleteUser(int id) {
+        userDao.deleteUser(id);
     }
 }
 
