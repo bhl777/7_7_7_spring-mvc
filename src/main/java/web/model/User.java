@@ -1,14 +1,28 @@
 package web.model;
 
+import org.springframework.stereotype.Component;
+
+import javax.persistence.*;
+
+
+@Entity
+@Table(name="users")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "surname")
     private String surname;
+
+    @Column(name = "age")
     private int age;
 
-    public User() {
-    }
+    public User() {}
 
     public User(int id, String name, String surname, int age) {
         this.id = id;
@@ -47,5 +61,15 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", age=" + age +
+                '}';
     }
 }
