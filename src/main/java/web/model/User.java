@@ -1,7 +1,5 @@
 package web.model;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 
 

@@ -20,7 +20,7 @@ public class UserController {
 
     @GetMapping(value = "/users")
     public String listUsers(Model model) {
-        model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("users", userService.getAll());
 
         return "/people/users"; // имя представления;
     }
@@ -31,10 +31,16 @@ public class UserController {
     }
 
     @GetMapping("/update")
-    public String updateUser (@ModelAttribute("user") User user){
+    public String getUpdatePage (@ModelAttribute("user") User user){
         return "/people/update";
     }
 
+    @PostMapping("/update")
+    public String updateUser(@ModelAttribute("user") User user,
+                             @RequestParam int id){
+        userService.updateUser(id, user);
+        return "redirect:/users";
+    }
 
     @PostMapping("/new")
     public String addUser(@ModelAttribute("user") User user) {

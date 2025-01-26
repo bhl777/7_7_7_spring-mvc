@@ -9,19 +9,19 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Component
+@Transactional
 public class UserDaoImpl implements UserDao{
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    @Transactional
     public void add(User user) {
         entityManager.persist(user);
     }
 
+
     @Override
-    @Transactional
     public void deleteUser(int id) {
         User user = entityManager.find(User.class, id);
         if (user != null) {
@@ -31,16 +31,15 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public List<User> getAll() {
-        return entityManager.createQuery("FROM User", User.class).getResultList();
+        return entityManager.createQuery(
+                "FROM User", User.class).getResultList();
     }
 
-    @Transactional
     @Override
-    public void updateUser(int id) {
-        User user = entityManager.find(User.class, id);
+    public void updateUser(int id, User user) {
+        User userId = entityManager.find(User.class, id);
         if (user != null) {
-            entityManager.remove(user);
+            entityManager.merge(user);
         }
     }
-
 }
