@@ -26,18 +26,18 @@ public class UserController {
     }
 
     @GetMapping("/new")
-    public String getAddPage (@ModelAttribute("user") User user){
+    public String getAddPage(@ModelAttribute("user") User user) {
         return "/people/new";
     }
 
     @GetMapping("/update")
-    public String getUpdatePage (@ModelAttribute("user") User user){
+    public String getUpdatePage(@ModelAttribute("user") User user) {
         return "/people/update";
     }
 
     @PostMapping("/update")
     public String updateUser(@ModelAttribute("user") User user,
-                             @RequestParam int id){
+                             @RequestParam int id) {
         userService.updateUser(id, user);
         return "redirect:/users";
     }
